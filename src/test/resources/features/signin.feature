@@ -21,7 +21,7 @@ Feature: Testing sign in and logout
     And sets up and confirms PIN code
     Then client sees My Credit page without Active loan
 
-  @regression
+  @regression @smoke
   Scenario: client with SOLD loan
     Given client opens creditPrime mobile application
     When client accepts terms and conditions
