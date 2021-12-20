@@ -1,0 +1,8 @@
+bin/
+out
+.idea
+.gradle
+build
+src/main/
+/creditPrime.apk
+/src/test/resources/features/predefinedClients.json
