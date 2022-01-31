@@ -21,17 +21,17 @@ public class BaseScreen extends AppFactory {
     JSONParser parser = new JSONParser();
 
     public void waitFor(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
     public void waitForInvisibilityOfElement(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
     }
 
     public void click(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         driver.findElement(element).click();
     }

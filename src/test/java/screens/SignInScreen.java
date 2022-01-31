@@ -37,13 +37,11 @@ public class SignInScreen extends BaseScreen {
         click(passwordField);
         sendKeysAction(password);
         click(proceedButton);
-        // Todo: need to remove Kostilj
         waitForInvisibilityOfElement(proceedButton);
-        tapByCoordinates(400,400);
-//        waitFor(setPIN);
         }
 
     public void setAndConfirmPIN() {
+        waitFor(setPIN);
         insertPIN(driver.findElement(By.xpath("//*[@content-desc='0']")));
         waitFor(confirmPINMessage);
         insertPIN(driver.findElement(By.xpath("//*[@content-desc='0']")));
