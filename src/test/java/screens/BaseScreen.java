@@ -21,17 +21,17 @@ public class BaseScreen extends AppFactory {
     JSONParser parser = new JSONParser();
 
     public void waitFor(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
     public void waitForInvisibilityOfElement(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
     }
 
     public void click(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         driver.findElement(element).click();
     }
@@ -41,9 +41,16 @@ public class BaseScreen extends AppFactory {
         action.sendKeys(inputText).perform();
     }
 
-    public void insertPIN(MobileElement element) {
+    // works faster than loop
+    public void insertPINByMultipleClick(MobileElement element) {
         Actions action = new Actions(driver);
         action.click(element).click(element).click(element).click(element).perform();
+    }
+
+    public void insertPIN(By element) {
+        for (int i = 0; i < 4; i++) {
+            driver.findElement(element).click();
+        }
     }
 
     public void tapByCoordinates(int x, int y) {
@@ -68,13 +75,13 @@ public class BaseScreen extends AppFactory {
         }
     }
 
-    public void reopenApplication () {
+    public void reopenApplication() {
         // will not reset mobile data
         driver.terminateApp("com.dyninno.mobileapp.romania");
         driver.activateApp("com.dyninno.mobileapp.romania");
     }
 
-    public void relaunchApplication (){
+    public void relaunchApplication() {
         // also resets mobile data
         driver.closeApp();
         driver.launchApp();

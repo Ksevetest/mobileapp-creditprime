@@ -3,6 +3,7 @@ package screens;
 import io.appium.java_client.MobileBy;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
+
 import java.io.IOException;
 import java.time.Duration;
 
@@ -41,13 +42,13 @@ public class SignInScreen extends BaseScreen {
         sendKeysAction(password);
         click(proceedButton);
         waitForInvisibilityOfElement(proceedButton);
-        }
+    }
 
     public void setAndConfirmPIN() {
         waitFor(setPIN);
-        insertPIN(driver.findElement(By.xpath("//*[@content-desc='0']")));
+        insertPIN(By.xpath("//*[@content-desc='0']"));
         waitFor(confirmPINMessage);
-        insertPIN(driver.findElement(By.xpath("//*[@content-desc='0']")));
+        insertPIN(By.xpath("//*[@content-desc='0']"));
     }
 
     public void skipFaceTouchID() {
@@ -56,12 +57,17 @@ public class SignInScreen extends BaseScreen {
         click(skipButton);
     }
 
-    public void reopenMobileApp(){
+    public void reopenMobileApp() {
         reopenApplication();
     }
 
     public void forgotPIN() {
         waitFor(insertPINMessage);
         click(forgotPIN);
+    }
+
+    public void setIncorrectPIN() {
+        waitFor(insertPINMessage);
+        insertPIN(By.xpath("//*[@content-desc='1']"));
     }
 }
