@@ -4,29 +4,29 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static io.appium.java_client.remote.MobileCapabilityType.*;
 
 public class AppFactory {
 
     public static AppiumDriver<MobileElement> driver;
 
     public void androidDriverFactory() {
-        DesiredCapabilities capability = new DesiredCapabilities();
-        capability.setCapability(CapabilityType.VERSION, " 10");
-        capability.setCapability("app", "Users/creditPrime.apk");
-        capability.setCapability("deviceName", "Pixel XL");
-        capability.setCapability("platformName", "Android");
-        capability.setCapability("reset", true);
-        capability.setCapability("appPackage", "com.dyninno.mobileapp.romania");
-        capability.setCapability("appActivity", "com.dyninno.mobileapp.romania.MainActivity");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(VERSION, " 10");
+        capabilities.setCapability(APP, "Users/creditPrime.apk");
+        capabilities.setCapability(DEVICE_NAME, "Pixel XL");
+        capabilities.setCapability(PLATFORM_NAME, "Android");
+        capabilities.setCapability("reset", true);
+        capabilities.setCapability("appPackage", "com.dyninno.mobileapp.romania");
+        capabilities.setCapability("appActivity", "com.dyninno.mobileapp.romania.MainActivity");
 
         try {
-            driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capability);
+            driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -34,24 +34,25 @@ public class AppFactory {
 
     public void iOSDriverFactory() {
         // To create an object of Desired Capabilities
-        DesiredCapabilities capability = new DesiredCapabilities();
-        capability.setCapability("automationName", "XCUITest");
-        capability.setCapability(CapabilityType.VERSION, " 15.0");
-        capability.setCapability("app", "Users/creditPrime.ipa");
-        capability.setCapability("deviceName", "iPhone 7 Plus");
-        capability.setCapability("platformName", "iOS");
-        capability.setCapability("reset", true);
-        capability.setCapability("appPackage", "com.dyninno.mobileapp.romania");
-        capability.setCapability("appActivity", "com.dyninno.mobileapp.romania.MainActivity");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(AUTOMATION_NAME, "XCUITest");
+        capabilities.setCapability(VERSION, " 15.0");
+        capabilities.setCapability(APP, "Users/creditPrime.ipa");
+        capabilities.setCapability(DEVICE_NAME, "iPhone 7 Plus");
+        capabilities.setCapability(PLATFORM_NAME, "iOS");
+        capabilities.setCapability("reset", true);
+        capabilities.setCapability("appPackage", "com.dyninno.mobileapp.romania");
+        capabilities.setCapability("appActivity", "com.dyninno.mobileapp.romania.MainActivity");
 
         try {
-            driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capability);
+            driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
     public void quitDriver() {
-        driver.quit();
+        if (driver != null)
+            driver.quit();
     }
 }

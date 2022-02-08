@@ -67,4 +67,16 @@ public class BaseScreen extends AppFactory {
             password = (String) jsonData.get("password");
         }
     }
+
+    public void reopenApplication () {
+        // will not reset mobile data
+        driver.terminateApp("com.dyninno.mobileapp.romania");
+        driver.activateApp("com.dyninno.mobileapp.romania");
+    }
+
+    public void relaunchApplication (){
+        // also resets mobile data
+        driver.closeApp();
+        driver.launchApp();
+    }
 }
