@@ -87,8 +87,8 @@ public class SmokeTestSteps {
     }
 
     @And("client presses incorrect PIN code {int} times in the row")
-    public void clientPressesIncorrectPINCodeTimesInTheRow(int tryCount) {
-        for (int i = 0; i < tryCount; i++) {
+    public void clientPressesIncorrectPINCodeTimesInTheRow(int badLoginCount) {
+        for (int i = 0; i < badLoginCount; i++) {
             signInScreen.setIncorrectPIN();
         }
     }
