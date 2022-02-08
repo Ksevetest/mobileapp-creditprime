@@ -14,6 +14,8 @@ import static io.appium.java_client.remote.MobileCapabilityType.*;
 public class AppFactory {
 
     public static AppiumDriver<MobileElement> driver;
+    protected String bundleID = "com.dyninno.mobileapp.romania";
+    protected String appMainActivity = "com.dyninno.mobileapp.romania.MainActivity";
 
     public void androidDriverFactory() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -22,8 +24,8 @@ public class AppFactory {
         capabilities.setCapability(DEVICE_NAME, "Pixel XL");
         capabilities.setCapability(PLATFORM_NAME, "Android");
         capabilities.setCapability("reset", true);
-        capabilities.setCapability("appPackage", "com.dyninno.mobileapp.romania");
-        capabilities.setCapability("appActivity", "com.dyninno.mobileapp.romania.MainActivity");
+        capabilities.setCapability("appPackage", bundleID);
+        capabilities.setCapability("appActivity", appMainActivity);
 
         try {
             driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
