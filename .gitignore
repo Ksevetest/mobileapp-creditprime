@@ -7,3 +7,4 @@ src/main/
 /creditPrime.apk
 /src/test/resources/features/predefinedClients.json
 /src/test/resources/cucumber.properties
+/src/test/java/helpers/ef_settings.json
