@@ -15,7 +15,7 @@ public class JsonParser {
 
     private static String inline = "";
 
-    public static String name, phone, password;
+    public static String name, phone, password, temporaryPassword;
 
     protected static JSONParser parser = new JSONParser();
     protected static String PREDEFINED_USERS = "src/test/resources/features/predefinedClients.json";
@@ -32,7 +32,6 @@ public class JsonParser {
 
     public static void establishConnection(String username) throws IOException, ParseException {
         URL url = new URL(getConfigFromJson(ENV) + PASSWORD_RECOVERY_ROUT + "4" + getPhoneNumber(username));
-        System.out.println(url);
         HttpURLConnection setUpConnection = (HttpURLConnection) url.openConnection();
         setUpConnection.setRequestMethod("GET");
         setUpConnection.connect();
@@ -59,9 +58,7 @@ public class JsonParser {
         String dataReplace = data.toString();
         Object replaceText = dataReplace.replace("{" + "\"message\":\"Ai solicitat resetarea parolei de acces in contul tau CreditPrime.ro. Pentru a te loga foloseste parola temporara: ", "");
         String replaceText2 = replaceText.toString();
-        String temporaryPassword = replaceText2.replace("\"" + "}", "");
-        // check result via console
-        System.out.println(temporaryPassword);
+        temporaryPassword = replaceText2.replace("\"" + "}", "");
     }
 
     public static void getJsonDataFromFile(String username) throws IOException, ParseException {

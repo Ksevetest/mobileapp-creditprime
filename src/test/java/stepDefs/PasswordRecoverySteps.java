@@ -4,29 +4,51 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.json.simple.parser.ParseException;
+import screens.MyCreditScreen;
+import screens.PasswordRecoveryScreen;
+import screens.SignInScreen;
+
+import java.io.IOException;
 
 public class PasswordRecoverySteps {
-    @Given("client {word} goes to password recovery page")
+
+    SignInScreen signInScreen = new SignInScreen();
+    PasswordRecoveryScreen passwordRecoveryScreen = new PasswordRecoveryScreen();
+    MyCreditScreen myCreditScreen = new MyCreditScreen();
+
+    @Given("client goes to password recovery page")
     public void clientTESTPASSWORDGoesToPasswordRecoveryPage() {
+        signInScreen.verifySignInScreen();
+        signInScreen.verifyTermsAndConditions();
+        passwordRecoveryScreen.verifyPasswordRecoveryScreen();
     }
 
-    @And("enters his phone number")
-    public void entersHisPhoneNumber() {
+    @And("{word} enters his phone number")
+    public void entersHisPhoneNumber(String username) throws IOException, ParseException {
+        passwordRecoveryScreen.enterPhoneNumber(username);
     }
 
     @And("sees success message that SMS is sent")
     public void seesSuccessMessageThatSMSIsSent() {
+        passwordRecoveryScreen.verifySMSIsSentMessage();
     }
 
-    @When("client enters temporary password that he received by SMS")
-    public void clientEntersTemporaryPasswordThatHeReceivedBySMS() {
+    @When("{word} enters temporary password that he received by SMS")
+    public void clientEntersTemporaryPasswordThatHeReceivedBySMS(String username) throws ParseException, IOException {
+        passwordRecoveryScreen.enterTempPassword(username);
     }
 
-    @And("chooses new password")
-    public void choosesNewPassword() {
+    @And("{word} chooses new password")
+    public void choosesNewPassword(String username) throws IOException, ParseException {
+        passwordRecoveryScreen.chooseNewPassword(username);
+        passwordRecoveryScreen.confirmNewPassword();
     }
 
     @Then("client successfully logs in and sees My Credit page")
     public void clientSuccessfullyLogsInAndSeesMyCreditPage() {
+        signInScreen.setAndConfirmPIN();
+        signInScreen.skipFaceTouchID();
+        myCreditScreen.verifyMyCreditScreenClientWithoutLoan();
     }
 }

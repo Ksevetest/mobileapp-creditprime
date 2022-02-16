@@ -17,7 +17,6 @@ public class SignInScreen extends BaseScreen {
             acceptButton = MobileBy.xpath("//*[@content-desc='ACCEPT']"),
             phoneNumber = MobileBy.xpath("//*[contains(@text,'Număr de telefon')]"),
             passwordField = MobileBy.xpath("//*[contains(@text,'Parola')]"),
-            proceedButton = MobileBy.xpath("//*[@content-desc='URMĂTORUL']"),
             setPIN = MobileBy.xpath("//*[@content-desc='0']"),
             confirmPINMessage = MobileBy.xpath("//*[@content-desc='Confirmă codul PIN']"),
             skipButton = MobileBy.xpath("//*[@content-desc='MAI DEPARTE']"),
@@ -35,7 +34,7 @@ public class SignInScreen extends BaseScreen {
     }
 
     public void insertCredentials(String username) throws IOException, ParseException {
-        getJsonData(username);
+        JsonParser.getJsonDataFromFile(username);
         click(phoneNumber);
         sendKeysAction(JsonParser.phone);
         click(passwordField);
@@ -69,9 +68,5 @@ public class SignInScreen extends BaseScreen {
     public void setIncorrectPIN() {
         waitFor(insertPINMessage);
         insertPIN(By.xpath("//*[@content-desc='1']"));
-    }
-
-    public void insertTemporaryPassword(String username) throws ParseException, IOException {
-        sendKeysAction(getTempPasswordFromJsonUrl(username));
     }
 }
