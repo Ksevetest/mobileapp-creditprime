@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.json.simple.parser.ParseException;
 import screens.MyCreditScreen;
+import screens.MyProfileScreen;
 import screens.PasswordRecoveryScreen;
 import screens.SignInScreen;
 
@@ -16,6 +17,7 @@ public class PasswordRecoverySteps {
     SignInScreen signInScreen = new SignInScreen();
     PasswordRecoveryScreen passwordRecoveryScreen = new PasswordRecoveryScreen();
     MyCreditScreen myCreditScreen = new MyCreditScreen();
+    MyProfileScreen myProfileScreen = new MyProfileScreen();
 
     @Given("client goes to password recovery page")
     public void clientTESTPASSWORDGoesToPasswordRecoveryPage() {
@@ -50,5 +52,42 @@ public class PasswordRecoverySteps {
         signInScreen.setAndConfirmPIN();
         signInScreen.skipFaceTouchID();
         myCreditScreen.verifyMyCreditScreenClientWithoutLoan();
+    }
+
+    @And("goes to My Profile page")
+    public void goesToMyProfilePage() {
+        myCreditScreen.verifyMyCreditScreenWithoutLoan();
+    }
+
+    @When("{word} changes password")
+    public void changesPassword(String username) throws IOException, ParseException {
+        myProfileScreen.changePassword(username);
+        myProfileScreen.setAndConfirmNewPIN();
+    }
+
+    @And("new password is set")
+    public void newPasswordIsSet() {
+        myProfileScreen.logoutAfterPasswordChange();
+        signInScreen.verifySignInScreen();
+        signInScreen.verifyTermsAndConditions();
+        signInScreen.logInWithNewPassword();
+
+    }
+
+    @Then("{word} changes password to old one")
+    public void clientChangesPasswordToOldOne(String username) throws IOException, ParseException {
+        signInScreen.setAndConfirmPIN();
+        signInScreen.skipFaceTouchID();
+        myCreditScreen.verifyMyCreditScreenWithoutLoan();
+        myProfileScreen.changeToOldPassword(username);
+        myProfileScreen.setAndConfirmNewPIN();
+    }
+
+    @And("old {word} password is set")
+    public void oldPasswordIsSet(String username) throws IOException, ParseException {
+        myProfileScreen.logoutAfterPasswordChange();
+        signInScreen.verifySignInScreen();
+        signInScreen.verifyTermsAndConditions();
+        signInScreen.insertCredentials(username);
     }
 }

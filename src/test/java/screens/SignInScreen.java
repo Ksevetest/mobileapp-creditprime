@@ -17,7 +17,6 @@ public class SignInScreen extends BaseScreen {
             acceptButton = MobileBy.xpath("//*[@content-desc='ACCEPT']"),
             phoneNumber = MobileBy.xpath("//*[contains(@text,'Număr de telefon')]"),
             passwordField = MobileBy.xpath("//*[contains(@text,'Parola')]"),
-            setPIN = MobileBy.xpath("//*[@content-desc='0']"),
             confirmPINMessage = MobileBy.xpath("//*[@content-desc='Confirmă codul PIN']"),
             skipButton = MobileBy.xpath("//*[@content-desc='MAI DEPARTE']"),
             insertPINMessage = MobileBy.xpath("//*[@content-desc='Introdu codul PIN']"),
@@ -68,5 +67,14 @@ public class SignInScreen extends BaseScreen {
     public void setIncorrectPIN() {
         waitFor(insertPINMessage);
         insertPIN(By.xpath("//*[@content-desc='1']"));
+    }
+
+    public void logInWithNewPassword() {
+        click(phoneNumber);
+        sendKeysAction(JsonParser.phone);
+        click(passwordField);
+        sendKeysAction(JsonParser.newPassword);
+        click(proceedButton);
+        waitForInvisibilityOfElement(proceedButton);
     }
 }

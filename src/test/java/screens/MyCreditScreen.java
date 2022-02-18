@@ -17,13 +17,16 @@ public class MyCreditScreen extends BaseScreen {
         tapByCoordinates(1280, 2300);
     }
 
+    public void verifyMyCreditScreenWithoutLoan() {
+        waitFor(noActiveLoanMessage);
+        tapByCoordinates(1280, 2300);
+    }
+
     public void verifyMyCreditScreenClientWithoutLoan() {
         waitFor(noActiveLoanMessage);
         waitFor(requestNewLoanButton);
         click(requestNewLoanButton);
         waitForInvisibilityOfElement(noActiveLoanMessage);
-//        String title = "Credit online - până la 4000 lei. Fără adeverință, fără comisioane ✅";
-//        assertThat(driver.getTitle().contains(title));
     }
 
     public void verifyMyCreditScreenClientWithSoldLoan() {

@@ -12,6 +12,11 @@ Feature: Testing password recovery and change
     And TEST-PASSWORD chooses new password
     Then client successfully logs in and sees My Credit page
 
-    #todo
-  @InDevelopment
+  @regression @passwordRecovery
   Scenario: Password change process
+    Given client logs in with TEST-PASSWORD2 credentials
+    And goes to My Profile page
+    When TEST-PASSWORD2 changes password
+    And new password is set
+    Then TEST-PASSWORD2 changes password to old one
+    And old TEST-PASSWORD2 password is set

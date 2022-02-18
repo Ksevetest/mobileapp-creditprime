@@ -17,20 +17,21 @@ public class BaseScreen extends AppFactory {
      * common buttons
      */
     By proceedButton = MobileBy.AccessibilityId("URMĂTORUL"),
+            setPIN = MobileBy.xpath("//*[@content-desc='0']"),
             editField = MobileBy.className("android.widget.EditText");
 
     public void waitFor(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
     public void waitForInvisibilityOfElement(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
     }
 
     public void click(By element) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         driver.findElement(element).click();
     }

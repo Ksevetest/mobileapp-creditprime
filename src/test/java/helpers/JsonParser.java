@@ -15,7 +15,7 @@ public class JsonParser {
 
     private static String inline = "";
 
-    public static String name, phone, password, temporaryPassword;
+    public static String name, phone, password, newPassword, temporaryPassword;
 
     protected static JSONParser parser = new JSONParser();
     protected static String PREDEFINED_USERS = "src/test/resources/features/predefinedClients.json";
@@ -23,6 +23,8 @@ public class JsonParser {
     protected static String API_DMS_DEV;
     protected static String ENV = "api_dev";
     protected static String PASSWORD_RECOVERY_ROUT = "/mobile-app/v1/password-recovery/sms/";
+    protected static String PHONE_CODE = "4";
+
 
     public static void main(String[] args) throws IOException, ParseException {
         //self-check
@@ -31,7 +33,7 @@ public class JsonParser {
     }
 
     public static void establishConnection(String username) throws IOException, ParseException {
-        URL url = new URL(getConfigFromJson(ENV) + PASSWORD_RECOVERY_ROUT + "4" + getPhoneNumber(username));
+        URL url = new URL(getConfigFromJson(ENV) + PASSWORD_RECOVERY_ROUT + PHONE_CODE + getPhoneNumber(username));
         HttpURLConnection setUpConnection = (HttpURLConnection) url.openConnection();
         setUpConnection.setRequestMethod("GET");
         setUpConnection.connect();
@@ -70,6 +72,7 @@ public class JsonParser {
             name = (String) jsonData.get("name");
             phone = (String) jsonData.get("phone");
             password = (String) jsonData.get("password");
+            newPassword = (String) jsonData.get("newPassword");
         }
     }
 
