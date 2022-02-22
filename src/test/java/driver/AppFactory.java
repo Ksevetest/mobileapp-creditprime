@@ -1,4 +1,4 @@
-package config;
+package driver;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -10,22 +10,21 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static io.appium.java_client.remote.MobileCapabilityType.*;
+import static helpers.Configuration.*;
 
 public class AppFactory {
 
     public static AppiumDriver<MobileElement> driver;
-    protected String bundleID = "com.dyninno.mobileapp.romania";
-    protected String appMainActivity = "com.dyninno.mobileapp.romania.MainActivity";
 
     public void androidDriverFactory() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(VERSION, " 10");
-        capabilities.setCapability(APP, "Users/creditPrime.apk");
-        capabilities.setCapability(DEVICE_NAME, "Pixel XL");
-        capabilities.setCapability(PLATFORM_NAME, "Android");
+        capabilities.setCapability(VERSION, ANDROID_VERSION);
+        capabilities.setCapability(APP, CREDIT_PRIME_RO_ANDROID);
+        capabilities.setCapability(DEVICE_NAME, PIXEL_XL);
+        capabilities.setCapability(PLATFORM_NAME, ANDROID);
         capabilities.setCapability("reset", true);
-        capabilities.setCapability("appPackage", bundleID);
-        capabilities.setCapability("appActivity", appMainActivity);
+        capabilities.setCapability("appPackage", roBundleID);
+        capabilities.setCapability("appActivity", roAppMainActivity);
 
         try {
             driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -37,14 +36,14 @@ public class AppFactory {
     public void iOSDriverFactory() {
         // To create an object of Desired Capabilities
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(VERSION, " 15.0");
-        capabilities.setCapability(APP, "Users/creditPrime.ipa");
-        capabilities.setCapability(DEVICE_NAME, "iPhone 7 Plus");
-        capabilities.setCapability(PLATFORM_NAME, "iOS");
+        capabilities.setCapability(AUTOMATION_NAME, XCUITest);
+        capabilities.setCapability(VERSION, IOS_VERSION);
+        capabilities.setCapability(APP, CREDIT_PRIME_RO_IOS);
+        capabilities.setCapability(DEVICE_NAME, IPHONE_7_PLUS);
+        capabilities.setCapability(PLATFORM_NAME, IOS);
         capabilities.setCapability("reset", true);
-        capabilities.setCapability("appPackage", "com.dyninno.mobileapp.romania");
-        capabilities.setCapability("appActivity", "com.dyninno.mobileapp.romania.MainActivity");
+        capabilities.setCapability("appPackage", roBundleID);
+        capabilities.setCapability("appActivity", roAppMainActivity);
 
         try {
             driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);

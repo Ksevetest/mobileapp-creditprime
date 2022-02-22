@@ -1,6 +1,6 @@
 package screens;
 
-import helpers.JsonParser;
+import helpers.user.TestUser;
 import io.appium.java_client.MobileBy;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
@@ -8,6 +8,9 @@ import org.openqa.selenium.By;
 import java.io.IOException;
 
 public class MyProfileScreen extends BaseScreen {
+
+    TestUser testUser = new TestUser();
+
     /**
      * Mobile Elements
      */
@@ -47,24 +50,22 @@ public class MyProfileScreen extends BaseScreen {
         click(changePasswordButton);
         waitFor(currentPasswordScreen);
         click(editPasswordField);
-        JsonParser.getJsonDataFromFile(username);
-        sendKeysAction(JsonParser.password);
+        sendKeysAction(testUser.getPassword(username));
         click(proceedButton);
         waitFor(newPasswordScreen);
         click(editPasswordField);
-        sendKeysAction(JsonParser.newPassword);
+        sendKeysAction(testUser.getNewPassword(username));
         click(proceedButton);
     }
 
     public void changeToOldPassword(String username) throws IOException, ParseException {
         click(changePasswordButton);
         click(editField);
-        JsonParser.getJsonDataFromFile(username);
-        sendKeysAction(JsonParser.newPassword);
+        sendKeysAction(testUser.getNewPassword(username));
         click(proceedButton);
         waitFor(newPasswordScreen);
         click(editField);
-        sendKeysAction(JsonParser.password);
+        sendKeysAction(testUser.getPassword(username));
         click(proceedButton);
     }
 

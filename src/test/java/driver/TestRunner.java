@@ -1,4 +1,4 @@
-package config;
+package driver;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

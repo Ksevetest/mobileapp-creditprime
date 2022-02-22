@@ -1,6 +1,6 @@
 package screens;
 
-import helpers.JsonParser;
+import helpers.user.TestUser;
 import io.appium.java_client.MobileBy;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
@@ -8,6 +8,9 @@ import org.openqa.selenium.By;
 import java.io.IOException;
 
 public class SignInScreen extends BaseScreen {
+
+    TestUser testUser = new TestUser();
+
     /**
      * Mobile Elements
      */
@@ -33,11 +36,10 @@ public class SignInScreen extends BaseScreen {
     }
 
     public void insertCredentials(String username) throws IOException, ParseException {
-        JsonParser.getJsonDataFromFile(username);
         click(phoneNumber);
-        sendKeysAction(JsonParser.phone);
+        sendKeysAction(testUser.getPhone(username));
         click(passwordField);
-        sendKeysAction(JsonParser.password);
+        sendKeysAction(testUser.getPassword(username));
         click(proceedButton);
         waitForInvisibilityOfElement(proceedButton);
     }
@@ -69,11 +71,11 @@ public class SignInScreen extends BaseScreen {
         insertPIN(By.xpath("//*[@content-desc='1']"));
     }
 
-    public void logInWithNewPassword() {
+    public void logInWithNewPassword(String username) throws IOException, ParseException {
         click(phoneNumber);
-        sendKeysAction(JsonParser.phone);
+        sendKeysAction(testUser.getPhone(username));
         click(passwordField);
-        sendKeysAction(JsonParser.newPassword);
+        sendKeysAction(testUser.getNewPassword(username));
         click(proceedButton);
         waitForInvisibilityOfElement(proceedButton);
     }

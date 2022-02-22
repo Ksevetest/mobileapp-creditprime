@@ -1,6 +1,6 @@
 package screens;
 
-import helpers.JsonParser;
+import helpers.user.TestUser;
 import io.appium.java_client.MobileBy;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import java.io.IOException;
 
 public class PasswordRecoveryScreen extends BaseScreen {
+
+    TestUser testUser = new TestUser();
 
     /**
      * Mobile Elements
@@ -28,9 +30,8 @@ public class PasswordRecoveryScreen extends BaseScreen {
     }
 
     public void enterPhoneNumber(String username) throws IOException, ParseException {
-        JsonParser.getJsonDataFromFile(username);
         click(editField);
-        sendKeysAction(JsonParser.phone);
+        sendKeysAction(testUser.getPhone(username));
         click(passwordRequestButton);
     }
 
@@ -41,24 +42,22 @@ public class PasswordRecoveryScreen extends BaseScreen {
 
     public void enterTempPassword(String username) throws ParseException, IOException {
         waitFor(tempPasswordScreen);
-        JsonParser.getTemporaryPassword(username);
         click(passwordEditField);
-        sendKeysAction(JsonParser.temporaryPassword);
+        sendKeysAction(testUser.getTemporaryPassword(username));
         click(proceedButton);
     }
 
     public void chooseNewPassword(String username) throws IOException, ParseException {
         waitFor(newPasswordScreen);
         click(editField);
-        JsonParser.getJsonDataFromFile(username);
-        sendKeysAction(JsonParser.password);
+        sendKeysAction(testUser.getPassword(username));
         click(proceedButton);
     }
 
-    public void confirmNewPassword() {
+    public void confirmNewPassword(String username) throws IOException, ParseException {
         waitFor(confirmPasswordScreen);
         click(editField);
-        sendKeysAction(JsonParser.password);
+        sendKeysAction(testUser.getPassword(username));
         click(proceedButton);
     }
 }

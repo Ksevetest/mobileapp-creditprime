@@ -17,6 +17,6 @@ Feature: Testing password recovery and change
     Given client logs in with TEST-PASSWORD2 credentials
     And goes to My Profile page
     When TEST-PASSWORD2 changes password
-    And new password is set
+    And TEST-PASSWORD2 new password is set
     Then TEST-PASSWORD2 changes password to old one
     And old TEST-PASSWORD2 password is set

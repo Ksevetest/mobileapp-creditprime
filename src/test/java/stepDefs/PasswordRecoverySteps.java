@@ -44,7 +44,7 @@ public class PasswordRecoverySteps {
     @And("{word} chooses new password")
     public void choosesNewPassword(String username) throws IOException, ParseException {
         passwordRecoveryScreen.chooseNewPassword(username);
-        passwordRecoveryScreen.confirmNewPassword();
+        passwordRecoveryScreen.confirmNewPassword(username);
     }
 
     @Then("client successfully logs in and sees My Credit page")
@@ -65,12 +65,12 @@ public class PasswordRecoverySteps {
         myProfileScreen.setAndConfirmNewPIN();
     }
 
-    @And("new password is set")
-    public void newPasswordIsSet() {
+    @And("{word} new password is set")
+    public void newPasswordIsSet(String username) throws IOException, ParseException {
         myProfileScreen.logoutAfterPasswordChange();
         signInScreen.verifySignInScreen();
         signInScreen.verifyTermsAndConditions();
-        signInScreen.logInWithNewPassword();
+        signInScreen.logInWithNewPassword(username);
 
     }
 

@@ -1,6 +1,6 @@
 package screens;
 
-import config.AppFactory;
+import driver.AppFactory;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static helpers.Configuration.*;
 
 public class BaseScreen extends AppFactory {
 
@@ -65,8 +67,8 @@ public class BaseScreen extends AppFactory {
 
     public void reopenApplication() {
         // will not reset mobile data
-        driver.terminateApp(bundleID);
-        driver.activateApp(bundleID);
+        driver.terminateApp(roBundleID);
+        driver.activateApp(roBundleID);
     }
 
     public void relaunchApplication() {
