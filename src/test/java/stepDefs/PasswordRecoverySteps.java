@@ -57,6 +57,7 @@ public class PasswordRecoverySteps {
     @And("goes to My Profile page")
     public void goesToMyProfilePage() {
         myCreditScreen.verifyMyCreditScreenWithoutLoan();
+        myProfileScreen.openMyProfileScreen();
     }
 
     @When("{word} changes password")
@@ -79,6 +80,7 @@ public class PasswordRecoverySteps {
         signInScreen.setAndConfirmPIN();
         signInScreen.skipFaceTouchID();
         myCreditScreen.verifyMyCreditScreenWithoutLoan();
+        myProfileScreen.openMyProfileScreen();
         myProfileScreen.changeToOldPassword(username);
         myProfileScreen.setAndConfirmNewPIN();
     }

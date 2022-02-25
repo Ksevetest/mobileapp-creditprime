@@ -21,14 +21,17 @@ public class MyProfileScreen extends BaseScreen {
             currentPasswordScreen = MobileBy.xpath("//android.view.View/android.view.View[contains(@content-desc,'Introdu parola curentă')]"),
             editPasswordField = MobileBy.xpath("//android.widget.EditText[contains(@text,'Parola')]"),
             newPasswordScreen = MobileBy.xpath("//android.view.View/android.view.View[contains(@content-desc,'Introdu parola nouă.')]"),
-            PasswordIsChangedMessage = MobileBy.AccessibilityId("Parola ta a fost schimbată"),
+            passwordIsChangedMessage = MobileBy.AccessibilityId("Parola ta a fost schimbată"),
+            myProfileButton = MobileBy.xpath("//android.widget.ImageView[contains(@content-desc, 'Profilul meu')]"),
             confirmNewPINMessage = MobileBy.xpath("//*[@content-desc='Confirmă noul cod PIN']");
 
-    public void verifyMyProfileScreen() {
-        scrollTo(700, 1100, 700, 300);
+    public void openMyProfileScreen() {
+        waitFor(myProfileButton);
+        click(myProfileButton);
     }
 
     public void logout() {
+        scrollTo(700, 1100, 700, 300);
         waitFor(logoutButton);
         click(logoutButton);
         waitFor(logoutPopUpButton);
@@ -37,7 +40,7 @@ public class MyProfileScreen extends BaseScreen {
     }
 
     public void logoutAfterPasswordChange() {
-        waitForInvisibilityOfElement(PasswordIsChangedMessage);
+        waitForInvisibilityOfElement(passwordIsChangedMessage);
         scrollTo(700, 1100, 700, 300);
         waitFor(logoutButton);
         click(logoutButton);

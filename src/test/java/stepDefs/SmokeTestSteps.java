@@ -44,7 +44,7 @@ public class SmokeTestSteps {
 
     @And("opens My Profile page")
     public void opensMyProfilePage() {
-        myProfileScreen.verifyMyProfileScreen();
+        myProfileScreen.openMyProfileScreen();
     }
 
     @And("logs out from the mobile app")

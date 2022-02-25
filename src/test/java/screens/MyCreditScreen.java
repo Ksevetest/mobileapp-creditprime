@@ -14,12 +14,10 @@ public class MyCreditScreen extends BaseScreen {
 
     public void verifyMyCreditScreen() {
         waitFor(myCreditScreenTitle);
-        tapByCoordinates(1280, 2300);
     }
 
     public void verifyMyCreditScreenWithoutLoan() {
         waitFor(noActiveLoanMessage);
-        tapByCoordinates(1280, 2300);
     }
 
     public void verifyMyCreditScreenClientWithoutLoan() {
