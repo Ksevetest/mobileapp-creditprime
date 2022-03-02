@@ -18,7 +18,7 @@ public class UrlConnector {
     public static String inline = "";
 
     public String passwordRecoveryUrl(String username) throws IOException, ParseException {
-        return configuration.getConfigFromJson(DEV_ENV) + PASSWORD_RECOVERY_ROUT + PHONE_CODE + testUser.getPhone(username);
+        return configuration.getConfigFromJson(DEV_ENV) + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
     }
 
     public void establishConnection(String username) throws IOException, ParseException {

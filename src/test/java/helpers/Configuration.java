@@ -21,7 +21,7 @@ public class Configuration {
     public static final String PROD_ENV = "api_prod";
 
     // api routs
-    public static final String PASSWORD_RECOVERY_ROUT = "/mobile-app/v1/password-recovery/sms/";
+    public static final String PASSWORD_RECOVERY_ROUTE = "/mobile-app/v1/password-recovery/sms/";
 
     public static final String PHONE_CODE = "4";
 
@@ -33,8 +33,8 @@ public class Configuration {
     public static final String CREDIT_PRIME_RO_ANDROID = "Users/creditPrime.apk";
     public static final String PIXEL_XL = "Pixel XL";
     public static final String ANDROID = "Android";
-    public static final String roBundleID = "com.dyninno.mobileapp.romania";
-    public static final String roAppMainActivity = "com.dyninno.mobileapp.romania.MainActivity";
+    public static final String RO_BUNDLE_ID = "com.dyninno.mobileapp.romania";
+    public static final String RO_APP_MAIN_ACTIVITY = "com.dyninno.mobileapp.romania.MainActivity";
 
     // IOS Capabilities
     public static final String XCUITest = "XCUITest";

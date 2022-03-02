@@ -23,8 +23,8 @@ public class AppFactory {
         capabilities.setCapability(DEVICE_NAME, PIXEL_XL);
         capabilities.setCapability(PLATFORM_NAME, ANDROID);
         capabilities.setCapability("reset", true);
-        capabilities.setCapability("appPackage", roBundleID);
-        capabilities.setCapability("appActivity", roAppMainActivity);
+        capabilities.setCapability("appPackage", RO_BUNDLE_ID);
+        capabilities.setCapability("appActivity", RO_APP_MAIN_ACTIVITY);
 
         try {
             driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -42,8 +42,8 @@ public class AppFactory {
         capabilities.setCapability(DEVICE_NAME, IPHONE_7_PLUS);
         capabilities.setCapability(PLATFORM_NAME, IOS);
         capabilities.setCapability("reset", true);
-        capabilities.setCapability("appPackage", roBundleID);
-        capabilities.setCapability("appActivity", roAppMainActivity);
+        capabilities.setCapability("appPackage", RO_BUNDLE_ID);
+        capabilities.setCapability("appActivity", RO_APP_MAIN_ACTIVITY);
 
         try {
             driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
