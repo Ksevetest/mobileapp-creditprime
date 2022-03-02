@@ -67,8 +67,8 @@ public class BaseScreen extends AppFactory {
 
     public void reopenApplication() {
         // will not reset mobile data
-        driver.terminateApp(roBundleID);
-        driver.activateApp(roBundleID);
+        driver.terminateApp(RO_BUNDLE_ID);
+        driver.activateApp(RO_BUNDLE_ID);
     }
 
     public void relaunchApplication() {
