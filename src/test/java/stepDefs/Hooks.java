@@ -1,6 +1,6 @@
 package stepDefs;
 
-import config.AppFactory;
+import driver.AppFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 

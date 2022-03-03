@@ -1,11 +1,16 @@
 package screens;
 
+import helpers.user.TestUser;
 import io.appium.java_client.MobileBy;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
+
 import java.io.IOException;
 
 public class SignInScreen extends BaseScreen {
+
+    TestUser testUser = new TestUser();
+
     /**
      * Mobile Elements
      */
@@ -15,41 +20,63 @@ public class SignInScreen extends BaseScreen {
             acceptButton = MobileBy.xpath("//*[@content-desc='ACCEPT']"),
             phoneNumber = MobileBy.xpath("//*[contains(@text,'Număr de telefon')]"),
             passwordField = MobileBy.xpath("//*[contains(@text,'Parola')]"),
-            proceedButton = MobileBy.xpath("//*[@content-desc='URMĂTORUL']"),
-            setPIN = MobileBy.xpath("//*[@content-desc='0']"),
             confirmPINMessage = MobileBy.xpath("//*[@content-desc='Confirmă codul PIN']"),
-            skipButton = MobileBy.xpath("//*[@content-desc='MAI DEPARTE']");
+            skipButton = MobileBy.xpath("//*[@content-desc='MAI DEPARTE']"),
+            insertPINMessage = MobileBy.xpath("//*[@content-desc='Introdu codul PIN']"),
+            forgotPIN = MobileBy.xpath("//*[@content-desc='Am uitat PIN code']");
 
     public void verifySignInScreen() {
         waitFor(welcomeMessage);
-        click(signInButton);
     }
 
     public void verifyTermsAndConditions() {
+        click(signInButton);
         waitFor(termsAndConditions);
         click(acceptButton);
     }
 
     public void insertCredentials(String username) throws IOException, ParseException {
-        getJsonData(username);
         click(phoneNumber);
-        sendKeysAction(phone);
+        sendKeysAction(testUser.getPhone(username));
         click(passwordField);
-        sendKeysAction(password);
+        sendKeysAction(testUser.getPassword(username));
         click(proceedButton);
         waitForInvisibilityOfElement(proceedButton);
-        }
+    }
 
     public void setAndConfirmPIN() {
         waitFor(setPIN);
-        insertPIN(driver.findElement(By.xpath("//*[@content-desc='0']")));
+        insertPIN(By.xpath("//*[@content-desc='0']"));
         waitFor(confirmPINMessage);
-        insertPIN(driver.findElement(By.xpath("//*[@content-desc='0']")));
+        insertPIN(By.xpath("//*[@content-desc='0']"));
     }
 
     public void skipFaceTouchID() {
         driver.navigate().back();
         waitFor(skipButton);
         click(skipButton);
+    }
+
+    public void reopenMobileApp() {
+        reopenApplication();
+    }
+
+    public void forgotPIN() {
+        waitFor(insertPINMessage);
+        click(forgotPIN);
+    }
+
+    public void setIncorrectPIN() {
+        waitFor(insertPINMessage);
+        insertPIN(By.xpath("//*[@content-desc='1']"));
+    }
+
+    public void logInWithNewPassword(String username) throws IOException, ParseException {
+        click(phoneNumber);
+        sendKeysAction(testUser.getPhone(username));
+        click(passwordField);
+        sendKeysAction(testUser.getNewPassword(username));
+        click(proceedButton);
+        waitForInvisibilityOfElement(proceedButton);
     }
 }

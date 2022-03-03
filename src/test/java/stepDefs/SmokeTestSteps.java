@@ -44,7 +44,7 @@ public class SmokeTestSteps {
 
     @And("opens My Profile page")
     public void opensMyProfilePage() {
-        myProfileScreen.verifyMyProfileScreen();
+        myProfileScreen.openMyProfileScreen();
     }
 
     @And("logs out from the mobile app")
@@ -60,5 +60,36 @@ public class SmokeTestSteps {
     @Then("client sees My Credit page with SOLD loan information")
     public void clientSeesMyCreditPageWithSOLDLoanInformation() {
         myCreditScreen.verifyMyCreditScreenClientWithSoldLoan();
+    }
+
+    @Given("client logs in with {word} credentials")
+    public void clientLogsInWithTESTSVETLANACredentials(String username) throws IOException, ParseException {
+        signInScreen.verifySignInScreen();
+        signInScreen.verifyTermsAndConditions();
+        signInScreen.insertCredentials(username);
+        signInScreen.setAndConfirmPIN();
+        signInScreen.skipFaceTouchID();
+    }
+
+    @When("client reopens the creditPrime mobile application")
+    public void clientReopensTheCreditPrimeMobileApplication() {
+        signInScreen.reopenMobileApp();
+    }
+
+    @And("client presses forgot PIN code")
+    public void clientPressesForgotPINCode() {
+        signInScreen.forgotPIN();
+    }
+
+    @Then("client sees initial welcome screen")
+    public void clientSeesInitialWelcomeScreen() {
+        signInScreen.verifySignInScreen();
+    }
+
+    @And("client presses incorrect PIN code {int} times in the row")
+    public void clientPressesIncorrectPINCodeTimesInTheRow(int badLoginCount) {
+        for (int i = 0; i < badLoginCount; i++) {
+            signInScreen.setIncorrectPIN();
+        }
     }
 }
