@@ -51,7 +51,7 @@ public class UrlConnector {
         return inline;
     }
 
-    public  void getConfigFromJson(String env) throws IOException, ParseException {
+    public void getConfigFromJson(String env) throws IOException, ParseException {
         Object obj = parser.parse(new FileReader(EF_SETTINGS));
         JSONObject jsonObject = (JSONObject) obj;
         JSONObject config = (JSONObject) jsonObject.get("DMS");
