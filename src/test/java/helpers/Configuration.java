@@ -1,12 +1,5 @@
 package helpers;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.FileReader;
-import java.io.IOException;
-
 public class Configuration {
 
     //testUsers
@@ -27,6 +20,7 @@ public class Configuration {
 
     // ef_settings
     public static String API_DMS_DEV;
+    public static String API_DMS_PROD;
 
     // Android Capabilities
     public static final String ANDROID_VERSION = "10";
@@ -43,14 +37,4 @@ public class Configuration {
     public static final String IPHONE_7_PLUS = "iPhone 7 Plus";
     public static final String IOS = "iOS";
 
-    // Json parser
-    protected static JSONParser parser = new JSONParser();
-
-    public  String getConfigFromJson(String env) throws IOException, ParseException {
-        Object obj = parser.parse(new FileReader(EF_SETTINGS));
-        JSONObject jsonObject = (JSONObject) obj;
-        JSONObject config = (JSONObject) jsonObject.get("DMS");
-        API_DMS_DEV = (String) config.get(env);
-        return API_DMS_DEV;
-    }
 }
