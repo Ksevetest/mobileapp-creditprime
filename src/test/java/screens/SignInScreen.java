@@ -24,7 +24,7 @@ public class SignInScreen extends BaseScreen {
             skipButton = MobileBy.xpath("//*[@content-desc='MAI DEPARTE']"),
             insertPINMessage = MobileBy.xpath("//*[@content-desc='Introdu codul PIN']"),
             forgotPIN = MobileBy.xpath("//*[@content-desc='Am uitat PIN code']"),
-            CongratulationMessage = MobileBy.AccessibilityId("Felicitări!"),
+            congratulationMessage = MobileBy.AccessibilityId("Felicitări!"),
             finishButton = MobileBy.AccessibilityId("Finalizare"),
             myCreditTab = MobileBy.xpath("//android.widget.ImageView[contains(@content-desc, 'Creditele mele')]");
 
@@ -62,7 +62,7 @@ public class SignInScreen extends BaseScreen {
 
     public void skipCongratulationMessage() {
         try {
-            driver.findElement(CongratulationMessage);
+            driver.findElement(congratulationMessage);
             click(finishButton);
         } catch (Exception ignored) {
         }
