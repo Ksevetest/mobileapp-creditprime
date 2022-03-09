@@ -23,7 +23,10 @@ public class SignInScreen extends BaseScreen {
             confirmPINMessage = MobileBy.xpath("//*[@content-desc='Confirmă codul PIN']"),
             skipButton = MobileBy.xpath("//*[@content-desc='MAI DEPARTE']"),
             insertPINMessage = MobileBy.xpath("//*[@content-desc='Introdu codul PIN']"),
-            forgotPIN = MobileBy.xpath("//*[@content-desc='Am uitat PIN code']");
+            forgotPIN = MobileBy.xpath("//*[@content-desc='Am uitat PIN code']"),
+            CongratulationMessage = MobileBy.AccessibilityId("Felicitări!"),
+            finishButton = MobileBy.AccessibilityId("Finalizare"),
+            myCreditTab = MobileBy.xpath("//android.widget.ImageView[contains(@content-desc, 'Creditele mele')]");
 
     public void verifySignInScreen() {
         waitFor(welcomeMessage);
@@ -55,6 +58,15 @@ public class SignInScreen extends BaseScreen {
         driver.navigate().back();
         waitFor(skipButton);
         click(skipButton);
+    }
+
+    public void skipCongratulationMessage() {
+        try {
+            driver.findElement(CongratulationMessage);
+            click(finishButton);
+        } catch (Exception ignored) {
+        }
+        waitFor(myCreditTab);
     }
 
     public void reopenMobileApp() {

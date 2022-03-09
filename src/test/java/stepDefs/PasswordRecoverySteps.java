@@ -51,6 +51,7 @@ public class PasswordRecoverySteps {
     public void clientSuccessfullyLogsInAndSeesMyCreditPage() {
         signInScreen.setAndConfirmPIN();
         signInScreen.skipFaceTouchID();
+        signInScreen.skipCongratulationMessage();
         myCreditScreen.verifyMyCreditScreenClientWithoutLoan();
     }
 

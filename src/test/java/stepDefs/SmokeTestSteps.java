@@ -35,6 +35,7 @@ public class SmokeTestSteps {
     public void setsUpAndConfirmsPINCode() {
         signInScreen.setAndConfirmPIN();
         signInScreen.skipFaceTouchID();
+        signInScreen.skipCongratulationMessage();
     }
 
     @Then("client sees My Credit page")
@@ -69,6 +70,7 @@ public class SmokeTestSteps {
         signInScreen.insertCredentials(username);
         signInScreen.setAndConfirmPIN();
         signInScreen.skipFaceTouchID();
+        signInScreen.skipCongratulationMessage();
     }
 
     @When("client reopens the creditPrime mobile application")
