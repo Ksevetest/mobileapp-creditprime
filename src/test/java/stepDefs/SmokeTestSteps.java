@@ -94,4 +94,10 @@ public class SmokeTestSteps {
             signInScreen.setIncorrectPIN();
         }
     }
+
+    @Then("client sees My Credit page with ACTIVE loan and principal_open {word}")
+    public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_open(String principalOpen) {
+        myCreditScreen.checkUsedAmount(principalOpen);
+        myCreditScreen.checkUnpaidAmount(principalOpen);
+    }
 }
