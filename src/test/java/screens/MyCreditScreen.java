@@ -1,11 +1,19 @@
 package screens;
 
+import helpers.api.CreditLineData;
 import io.appium.java_client.MobileBy;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 
+import java.io.IOException;
+
 import static org.assertj.core.api.Assertions.*;
+import static helpers.api.CreditLineData.*;
 
 public class MyCreditScreen extends BaseScreen {
+
+    CreditLineData creditLineData = new CreditLineData();
+
     /**
      * Mobile Elements
      */
@@ -14,9 +22,9 @@ public class MyCreditScreen extends BaseScreen {
             requestNewLoanButton = MobileBy.AccessibilityId("APLICĂ PENTRU UN ÎMPRUMUT NOU"),
             soldLoanMessage = MobileBy.AccessibilityId("Creditul a fost vândut"),
             expandCreditInfo = MobileBy.xpath("//android.view.View[1]/android.widget.ImageView[2]"),
-            totalUnpaid = MobileBy.AccessibilityId("Total sumă datorată");
-    String usedAmount = ("//android.view.View[@content-desc='%s']");
-    String unpaidAmount = ("//android.view.View[@content-desc='%s lei']");
+            totalUnpaid = MobileBy.xpath("//android.view.View[contains(@content-desc,'Total sumă datorată')]");
+    String creditLineUsedAmount = ("//android.view.View[@content-desc='%s" + ".00']");
+    String creditLineUnpaidAmount = ("//android.view.View[@content-desc='%s" + ".00 lei']");
 
     public void verifyMyCreditScreen() {
         waitFor(myCreditScreenTitle);
@@ -37,17 +45,29 @@ public class MyCreditScreen extends BaseScreen {
         waitFor(soldLoanMessage);
     }
 
-    public void checkUsedAmount(String principalOpen) {
-        usedAmount = String.format(usedAmount, principalOpen);
-        assertThat(usedAmount).contains(principalOpen);
-        driver.findElementByXPath(usedAmount);
+    public void checkUsedAmount(String username, String principalOpen) throws IOException, ParseException {
+        amountUsed = creditLineData.getAmountUsed(username);
+        assertThat(amountUsed).isEqualTo(principalOpen);
+        creditLineUsedAmount = String.format(creditLineUsedAmount, amountUsed);
+        System.out.println(creditLineUsedAmount);
+        waitFor(By.xpath(creditLineUsedAmount));
     }
 
-    public void checkUnpaidAmount(String principalOpen) {
+    public void checkUnpaidAmount(String username, String principalOpen) throws IOException, ParseException {
         click(expandCreditInfo);
         waitFor(totalUnpaid);
-        unpaidAmount = String.format(unpaidAmount, principalOpen);
-        assertThat(unpaidAmount).contains(principalOpen);
-        driver.findElementByXPath(unpaidAmount);
+        fullAmountToRepay = creditLineData.getFullAmountToRepay(username);
+        assertThat(fullAmountToRepay).isEqualTo(principalOpen);
+        creditLineUnpaidAmount = String.format(creditLineUnpaidAmount, fullAmountToRepay);
+        System.out.println(creditLineUnpaidAmount);
+        driver.findElementByXPath(creditLineUnpaidAmount);
+    }
+
+    public void checkThatUsedAmountGreaterThanZero(String username, String principalOpen) throws IOException, ParseException {
+        amountUsed = creditLineData.getAmountUsed(username);
+        assertThat(amountUsed).isGreaterThan(principalOpen);
+        creditLineUsedAmount = String.format(creditLineUsedAmount, amountUsed);
+        System.out.println(creditLineUsedAmount);
+        waitFor(By.xpath(creditLineUsedAmount));
     }
 }

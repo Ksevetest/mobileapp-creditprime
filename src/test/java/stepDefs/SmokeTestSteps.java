@@ -95,9 +95,14 @@ public class SmokeTestSteps {
         }
     }
 
-    @Then("client sees My Credit page with ACTIVE loan and principal_open {word}")
-    public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_open(String principalOpen) {
-        myCreditScreen.checkUsedAmount(principalOpen);
-        myCreditScreen.checkUnpaidAmount(principalOpen);
+    @Then("{word} sees My Credit page with ACTIVE loan and principal_open {word}")
+    public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_open(String username, String principalOpen) throws IOException, ParseException {
+        myCreditScreen.checkUsedAmount(username, principalOpen);
+        myCreditScreen.checkUnpaidAmount(username, principalOpen);
+    }
+
+    @Then("{word} sees My Credit page with ACTIVE loan and principal_open greater than {word}")
+    public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_openGreaterThanZero(String username, String principalOpen) throws IOException, ParseException {
+        myCreditScreen.checkThatUsedAmountGreaterThanZero(username, principalOpen);
     }
 }

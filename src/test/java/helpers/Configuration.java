@@ -15,6 +15,7 @@ public class Configuration {
 
     // api routs
     public static final String PASSWORD_RECOVERY_ROUTE = "/mobile-app/v1/password-recovery/sms/";
+    public static final String CREDIT_LINE_ROUTE = "/mobile-app/v1/credit-line/";
 
     public static final String PHONE_CODE = "4";
 
@@ -36,5 +37,4 @@ public class Configuration {
     public static final String CREDIT_PRIME_RO_IOS = "Users/creditPrime.ipa";
     public static final String IPHONE_7_PLUS = "iPhone 7 Plus";
     public static final String IOS = "iOS";
-
 }
