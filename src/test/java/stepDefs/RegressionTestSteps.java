@@ -115,4 +115,9 @@ public class RegressionTestSteps {
     public void clientSeesMyCreditPageWithDpdMessage(String username, Integer dpd) throws IOException, ParseException {
         myCreditScreen.check91DPDLoan(username, dpd);
     }
+
+    @Then("client sees My Credit page with CONFIRMED application message")
+    public void clientSeesMyCreditPageWithMessageThatHeWillBeContactedByCreditPrimeSpecialist() {
+        myCreditScreen.checkConfirmedApplicationMessage();
+    }
 }

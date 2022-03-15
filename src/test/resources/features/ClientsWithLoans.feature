@@ -43,3 +43,11 @@ Feature: Testing clients with loans
     And sets up and confirms PIN code
     Then TEST-91DPD sees My Credit page with LATE loan 91+ dpd message
 
+  @regression
+  Scenario: Client with COMPLETED loan and next CL CONFIRMED application
+    Given client opens creditPrime mobile application
+    When client accepts terms and conditions
+    And inserts TEST-CONFIRMED valid credentials
+    And sets up and confirms PIN code
+    Then client sees My Credit page with CONFIRMED application message
+
