@@ -25,6 +25,8 @@ public class MyCreditScreen extends BaseScreen {
             totalUnpaid = MobileBy.xpath("//android.view.View[contains(@content-desc,'Total sumă datorată')]");
     String creditLineUsedAmount = ("//android.view.View[@content-desc='%s" + ".00']");
     String creditLineUnpaidAmount = ("//android.view.View[@content-desc='%s" + ".00 lei']");
+    String paymentOnDueDate = ("//android.view.View[contains(@content-desc, '%s" + "0 lei')]");
+    String lateLoanMessage = ("//android.view.View[contains(@content-desc, 'Ai %s zile de întârziere la plată! Te rugăm să achiți cât mai rapid suma indicată mai sus.')]");
 
     public void verifyMyCreditScreen() {
         waitFor(myCreditScreenTitle);
@@ -69,5 +71,16 @@ public class MyCreditScreen extends BaseScreen {
         creditLineUsedAmount = String.format(creditLineUsedAmount, amountUsed);
         System.out.println(creditLineUsedAmount);
         waitFor(By.xpath(creditLineUsedAmount));
+    }
+
+    public void checkLateLoan(String username) throws IOException, ParseException {
+        minPaymentOnDueDate = creditLineData.getMinPaymentOnDueDate(username);
+        paymentOnDueDate = String.format(paymentOnDueDate, minPaymentOnDueDate);
+        System.out.println(paymentOnDueDate);
+        waitFor(By.xpath(paymentOnDueDate));
+        currentDPD = creditLineData.getCurrentDPDCount(username);
+        lateLoanMessage = String.format(lateLoanMessage, currentDPD);
+        System.out.println(lateLoanMessage);
+        waitFor(By.xpath(lateLoanMessage));
     }
 }

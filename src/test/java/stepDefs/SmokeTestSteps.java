@@ -105,4 +105,9 @@ public class SmokeTestSteps {
     public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_openGreaterThanZero(String username, String principalOpen) throws IOException, ParseException {
         myCreditScreen.checkThatUsedAmountGreaterThanZero(username, principalOpen);
     }
+
+    @Then("{word} sees My Credit page with LATE loan warning message")
+    public void clientSeesMyCreditPageWithLATELoanWarningMessage(String username) throws IOException, ParseException {
+        myCreditScreen.checkLateLoan(username);
+    }
 }

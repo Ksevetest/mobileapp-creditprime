@@ -12,7 +12,7 @@ public class CreditLineData {
     JSONParser parse = new JSONParser();
     UrlConnector urlConnector = new UrlConnector();
 
-    public static String loanId, status, amountUsed, amountAvailable, amountApproved, minPaymentOnDueDate, fullAmountToRepay, SABalance;
+    public static String loanId, status, amountUsed, amountAvailable, amountApproved, minPaymentOnDueDate, fullAmountToRepay, SABalance, currentDPD;
 
     public void getCreditLineDataFromJson(String username) throws IOException, ParseException {
         JSONObject jsonObject = (JSONObject) parse.parse(urlConnector.getCreditLineData(username));
@@ -26,6 +26,7 @@ public class CreditLineData {
         minPaymentOnDueDate = String.valueOf(data.get("min_payment_on_due_date"));
         fullAmountToRepay = String.valueOf(data.get("full_amount_to_repay"));
         SABalance = String.valueOf(data.get("statement_account_balance"));
+        currentDPD = String.valueOf(data.get("current_dpd"));
     }
 
     public String getLoanId(String username) throws IOException, ParseException {
@@ -66,5 +67,10 @@ public class CreditLineData {
     public String getSABalance(String username) throws IOException, ParseException {
         getCreditLineDataFromJson(username);
         return SABalance;
+    }
+
+    public String getCurrentDPDCount(String username) throws IOException, ParseException {
+        getCreditLineDataFromJson(username);
+        return currentDPD;
     }
 }

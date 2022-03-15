@@ -27,3 +27,12 @@ Feature: Testing clients with loans
     And sets up and confirms PIN code
     Then TEST-MUNTEANU sees My Credit page with ACTIVE loan and principal_open greater than 0
 
+  @regression
+  Scenario: Client with LATE loan
+    Given client opens creditPrime mobile application
+    When client accepts terms and conditions
+    And inserts TEST-RADOI valid credentials
+    And sets up and confirms PIN code
+    Then TEST-RADOI sees My Credit page with LATE loan warning message
+
+
