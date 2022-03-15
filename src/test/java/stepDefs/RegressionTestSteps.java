@@ -11,7 +11,7 @@ import screens.SignInScreen;
 
 import java.io.IOException;
 
-public class SmokeTestSteps {
+public class RegressionTestSteps {
     SignInScreen signInScreen = new SignInScreen();
     MyCreditScreen myCreditScreen = new MyCreditScreen();
     MyProfileScreen myProfileScreen = new MyProfileScreen();
@@ -95,19 +95,24 @@ public class SmokeTestSteps {
         }
     }
 
-    @Then("{word} sees My Credit page with ACTIVE loan and principal_open {word}")
-    public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_open(String username, String principalOpen) throws IOException, ParseException {
+    @Then("{word} sees My Credit page with ACTIVE loan and principal_open {int}")
+    public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_open(String username, Integer principalOpen) throws IOException, ParseException {
         myCreditScreen.checkUsedAmount(username, principalOpen);
         myCreditScreen.checkUnpaidAmount(username, principalOpen);
     }
 
-    @Then("{word} sees My Credit page with ACTIVE loan and principal_open greater than {word}")
-    public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_openGreaterThanZero(String username, String principalOpen) throws IOException, ParseException {
+    @Then("{word} sees My Credit page with ACTIVE loan and principal_open greater than {int}")
+    public void clientSeesMyCreditPageWithACTIVELoanAndPrincipal_openGreaterThanZero(String username, Integer principalOpen) throws IOException, ParseException {
         myCreditScreen.checkThatUsedAmountGreaterThanZero(username, principalOpen);
     }
 
     @Then("{word} sees My Credit page with LATE loan warning message")
     public void clientSeesMyCreditPageWithLATELoanWarningMessage(String username) throws IOException, ParseException {
         myCreditScreen.checkLateLoan(username);
+    }
+
+    @Then("{word} sees My Credit page with LATE loan {int}+ dpd message")
+    public void clientSeesMyCreditPageWithDpdMessage(String username, Integer dpd) throws IOException, ParseException {
+        myCreditScreen.check91DPDLoan(username, dpd);
     }
 }

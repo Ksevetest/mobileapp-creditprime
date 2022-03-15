@@ -15,24 +15,31 @@ Feature: Testing clients with loans
   Scenario: Client with an ACTIVE credit line and principal_open 0
     Given client opens creditPrime mobile application
     When client accepts terms and conditions
-    And inserts TEST-CHIRIAC valid credentials
+    And inserts TEST-ZERO-PRINCIPAL valid credentials
     And sets up and confirms PIN code
-    Then TEST-CHIRIAC sees My Credit page with ACTIVE loan and principal_open 0
+    Then TEST-ZERO-PRINCIPAL sees My Credit page with ACTIVE loan and principal_open 0
 
   @regression
   Scenario: Client with ACTIVE credit line and principal_open > 0
     Given client opens creditPrime mobile application
     When client accepts terms and conditions
-    And inserts TEST-MUNTEANU valid credentials
+    And inserts TEST-ACTIVE valid credentials
     And sets up and confirms PIN code
-    Then TEST-MUNTEANU sees My Credit page with ACTIVE loan and principal_open greater than 0
+    Then TEST-ACTIVE sees My Credit page with ACTIVE loan and principal_open greater than 0
 
   @regression
   Scenario: Client with LATE loan
     Given client opens creditPrime mobile application
     When client accepts terms and conditions
-    And inserts TEST-RADOI valid credentials
+    And inserts TEST-LATE valid credentials
     And sets up and confirms PIN code
-    Then TEST-RADOI sees My Credit page with LATE loan warning message
+    Then TEST-LATE sees My Credit page with LATE loan warning message
 
+  @regression
+  Scenario: Client with LATE loan 91 dpd
+    Given client opens creditPrime mobile application
+    When client accepts terms and conditions
+    And inserts TEST-91DPD valid credentials
+    And sets up and confirms PIN code
+    Then TEST-91DPD sees My Credit page with LATE loan 91+ dpd message
 

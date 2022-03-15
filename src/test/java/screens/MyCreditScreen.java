@@ -27,6 +27,7 @@ public class MyCreditScreen extends BaseScreen {
     String creditLineUnpaidAmount = ("//android.view.View[@content-desc='%s" + ".00 lei']");
     String paymentOnDueDate = ("//android.view.View[contains(@content-desc, '%s" + "0 lei')]");
     String lateLoanMessage = ("//android.view.View[contains(@content-desc, 'Ai %s zile de întârziere la plată! Te rugăm să achiți cât mai rapid suma indicată mai sus.')]");
+    String late91dpdLoanMessage = ("//android.view.View[contains(@content-desc, 'Ai %s zile de întârziere cu plata! Achită suma astăzi pentru a evita consecințele juridice.')]");
 
     public void verifyMyCreditScreen() {
         waitFor(myCreditScreenTitle);
@@ -47,27 +48,30 @@ public class MyCreditScreen extends BaseScreen {
         waitFor(soldLoanMessage);
     }
 
-    public void checkUsedAmount(String username, String principalOpen) throws IOException, ParseException {
+    public void checkUsedAmount(String username, Integer principalOpen) throws IOException, ParseException {
         amountUsed = creditLineData.getAmountUsed(username);
-        assertThat(amountUsed).isEqualTo(principalOpen);
+        int amount = Integer.parseInt(amountUsed);
+        assertThat(amount).isEqualTo(principalOpen);
         creditLineUsedAmount = String.format(creditLineUsedAmount, amountUsed);
         System.out.println(creditLineUsedAmount);
         waitFor(By.xpath(creditLineUsedAmount));
     }
 
-    public void checkUnpaidAmount(String username, String principalOpen) throws IOException, ParseException {
+    public void checkUnpaidAmount(String username, Integer principalOpen) throws IOException, ParseException {
         click(expandCreditInfo);
         waitFor(totalUnpaid);
         fullAmountToRepay = creditLineData.getFullAmountToRepay(username);
-        assertThat(fullAmountToRepay).isEqualTo(principalOpen);
+        int fullAmount = Integer.parseInt(fullAmountToRepay);
+        assertThat(fullAmount).isEqualTo(principalOpen);
         creditLineUnpaidAmount = String.format(creditLineUnpaidAmount, fullAmountToRepay);
         System.out.println(creditLineUnpaidAmount);
         driver.findElementByXPath(creditLineUnpaidAmount);
     }
 
-    public void checkThatUsedAmountGreaterThanZero(String username, String principalOpen) throws IOException, ParseException {
+    public void checkThatUsedAmountGreaterThanZero(String username, Integer principalOpen) throws IOException, ParseException {
         amountUsed = creditLineData.getAmountUsed(username);
-        assertThat(amountUsed).isGreaterThan(principalOpen);
+        int amount = Integer.parseInt(amountUsed);
+        assertThat(amount).isGreaterThan(principalOpen);
         creditLineUsedAmount = String.format(creditLineUsedAmount, amountUsed);
         System.out.println(creditLineUsedAmount);
         waitFor(By.xpath(creditLineUsedAmount));
@@ -82,5 +86,14 @@ public class MyCreditScreen extends BaseScreen {
         lateLoanMessage = String.format(lateLoanMessage, currentDPD);
         System.out.println(lateLoanMessage);
         waitFor(By.xpath(lateLoanMessage));
+    }
+
+    public void check91DPDLoan (String username, Integer dpd)throws IOException, ParseException {
+        currentDPD = creditLineData.getCurrentDPDCount(username);
+        int daysPastDue = Integer.parseInt(currentDPD);
+        assertThat(daysPastDue).isGreaterThanOrEqualTo(dpd);
+        late91dpdLoanMessage = String.format(late91dpdLoanMessage, currentDPD);
+        System.out.println(late91dpdLoanMessage);
+        waitFor(By.xpath(late91dpdLoanMessage));
     }
 }
