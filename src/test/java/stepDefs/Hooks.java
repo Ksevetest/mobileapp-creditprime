@@ -3,6 +3,7 @@ package stepDefs;
 import driver.AppFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 public class Hooks extends AppFactory {
 
@@ -17,7 +18,7 @@ public class Hooks extends AppFactory {
     }
 
     @After
-    public void quitApp() {
-        quitDriver();
+    public void quitApp(Scenario scenario) {
+        tearDown(scenario);
     }
 }
