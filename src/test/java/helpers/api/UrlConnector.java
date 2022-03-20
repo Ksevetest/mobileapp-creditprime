@@ -20,17 +20,22 @@ public class UrlConnector {
 
     public static String inline = "";
 
-    public String passwordRecoveryDevUrl(String username) throws IOException, ParseException {
-        return getDMSDevUrl(DEV_ENV) + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
+    public void passwordRecoveryDevUrl(String username) throws IOException, ParseException {
+        String passwordRecoveryDev = getDMSDevUrl(DEV_ENV) + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
+        establishConnection(passwordRecoveryDev);
     }
 
-    public String passwordRecoveryProdUrl(String username) throws IOException, ParseException {
-        return getDMSProdUrl(PROD_ENV) + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
+    public void passwordRecoveryProdUrl(String username) throws IOException, ParseException {
+        String passwordRecoveryProd = getDMSProdUrl(PROD_ENV) + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
     }
 
-    public void establishConnection(String username) throws IOException, ParseException {
+    public void creditLineDevUrl(String username) throws IOException, ParseException {
+        String creditLineDev = getDMSDevUrl(DEV_ENV) + CREDIT_LINE_ROUTE + testUser.getClientId(username);
+        establishConnection(creditLineDev);
+    }
 
-        URL url = new URL(passwordRecoveryDevUrl(username));
+    public void establishConnection(String dmsUrl) throws IOException {
+        URL url = new URL(dmsUrl);
         System.out.println(url);
         HttpURLConnection setUpConnection = (HttpURLConnection) url.openConnection();
         setUpConnection.setRequestMethod("GET");
@@ -46,8 +51,13 @@ public class UrlConnector {
         setUpConnection.disconnect();
     }
 
-    public String getInline(String username) throws IOException, ParseException {
-        establishConnection(username);
+    public String getInlinePasswordRecovery(String username) throws IOException, ParseException {
+        passwordRecoveryDevUrl(username);
+        return inline;
+    }
+
+    public String getCreditLineData(String username) throws IOException, ParseException {
+        creditLineDevUrl(username);
         return inline;
     }
 
@@ -57,7 +67,6 @@ public class UrlConnector {
         JSONObject config = (JSONObject) jsonObject.get("DMS");
         API_DMS_DEV = (String) config.get(env);
         API_DMS_PROD = (String) config.get(env);
-
     }
 
     public String getDMSDevUrl(String env) throws IOException, ParseException {

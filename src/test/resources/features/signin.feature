@@ -20,11 +20,3 @@ Feature: Testing sign in and logout
     And inserts TEST-STANCUUS valid credentials
     And sets up and confirms PIN code
     Then client sees My Credit page without Active loan
-
-  @regression
-  Scenario: client with SOLD loan
-    Given client opens creditPrime mobile application
-    When client accepts terms and conditions
-    And inserts TEST-SOLD valid credentials
-    And sets up and confirms PIN code
-    Then client sees My Credit page with SOLD loan information

@@ -12,7 +12,7 @@ import static helpers.Configuration.PREDEFINED_USERS;
 
 public class TestUser {
 
-    public static String name, phone, password, newPassword, temporaryPassword, message;
+    public static String name, clientId, phone, password, newPassword, temporaryPassword, message;
 
     protected static JSONParser parser = new JSONParser();
 
@@ -22,6 +22,7 @@ public class TestUser {
         JSONObject user = (JSONObject) jsonObject.get(username);
 
         name = (String) user.get("name");
+        clientId = (String) user.get("clientId");
         phone = (String) user.get("phone");
         password = (String) user.get("password");
         newPassword = (String) user.get("newPassword");
@@ -30,6 +31,11 @@ public class TestUser {
     public String getName(String username) throws IOException, ParseException {
         TestUserData(username);
         return name;
+    }
+
+    public String getClientId(String username) throws IOException, ParseException {
+        TestUserData(username);
+        return clientId;
     }
 
     public String getPhone(String username) throws IOException, ParseException {
@@ -50,7 +56,7 @@ public class TestUser {
     public void getTempPasswordFromJson(String username) throws ParseException, IOException {
         UrlConnector urlConnector = new UrlConnector();
         JSONParser parse = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parse.parse(urlConnector.getInline(username));
+        JSONObject jsonObject = (JSONObject) parse.parse(urlConnector.getInlinePasswordRecovery(username));
         JSONObject result = (JSONObject) jsonObject.get("result");
         JSONObject data = (JSONObject) result.get("data");
         message = (String) data.get("message");
