@@ -98,6 +98,6 @@ public class MyCreditScreen extends BaseScreen {
     }
 
     public void checkConfirmedApplicationMessage() {
-    // ToDo there is a bug on Chili side. The client doesn't see the success message. Waiting for fix.
+    // ToDo there is a bug on the partner side. The client doesn't see the success message. Waiting for fix.
     }
 }
