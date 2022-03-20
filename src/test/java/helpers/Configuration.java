@@ -37,4 +37,6 @@ public class Configuration {
     public static final String CREDIT_PRIME_RO_IOS = "Users/creditPrime.ipa";
     public static final String IPHONE_7_PLUS = "iPhone 7 Plus";
     public static final String IOS = "iOS";
+
+    public static final String DEFAULT_SCREENSHOT_FOLDER_PATH = "screenshots";
 }

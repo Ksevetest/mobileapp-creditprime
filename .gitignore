@@ -8,3 +8,4 @@ src/main/
 /src/test/resources/cucumber.properties
 /src/test/java/helpers/user/predefinedClients.json
 /src/test/java/helpers/api/ef_settings.json
+/screenshots/
