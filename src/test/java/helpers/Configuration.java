@@ -8,11 +8,6 @@ public class Configuration {
     // api urls
     public static final String EF_SETTINGS = "src/test/java/helpers/api/ef_settings.json";
 
-    // env
-    public static final String DEV_ENV = "api_dev";
-    public static final String STAGING_ENV = "api_staging";
-    public static final String PROD_ENV = "api_prod";
-
     // api routs
     public static final String PASSWORD_RECOVERY_ROUTE = "/mobile-app/v1/password-recovery/sms/";
     public static final String CREDIT_LINE_ROUTE = "/mobile-app/v1/credit-line/";

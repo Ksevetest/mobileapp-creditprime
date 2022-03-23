@@ -21,16 +21,16 @@ public class UrlConnector {
     public static String inline = "";
 
     public void passwordRecoveryDevUrl(String username) throws IOException, ParseException {
-        String passwordRecoveryDev = getDMSDevUrl(DEV_ENV) + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
+        String passwordRecoveryDev = getDMSDevUrl() + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
         establishConnection(passwordRecoveryDev);
     }
 
     public void passwordRecoveryProdUrl(String username) throws IOException, ParseException {
-        String passwordRecoveryProd = getDMSProdUrl(PROD_ENV) + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
+        String passwordRecoveryProd = getDMSProdUrl() + PASSWORD_RECOVERY_ROUTE + PHONE_CODE + testUser.getPhone(username);
     }
 
     public void creditLineDevUrl(String username) throws IOException, ParseException {
-        String creditLineDev = getDMSDevUrl(DEV_ENV) + CREDIT_LINE_ROUTE + testUser.getClientId(username);
+        String creditLineDev = getDMSDevUrl() + CREDIT_LINE_ROUTE + testUser.getClientId(username);
         establishConnection(creditLineDev);
     }
 
@@ -61,21 +61,21 @@ public class UrlConnector {
         return inline;
     }
 
-    public void getConfigFromJson(String env) throws IOException, ParseException {
+    public void getConfigFromJson() throws IOException, ParseException {
         Object obj = parser.parse(new FileReader(EF_SETTINGS));
         JSONObject jsonObject = (JSONObject) obj;
         JSONObject config = (JSONObject) jsonObject.get("DMS");
-        API_DMS_DEV = (String) config.get(env);
-        API_DMS_PROD = (String) config.get(env);
+        API_DMS_DEV = (String) config.get("api_dev");
+        API_DMS_PROD = (String) config.get("api_prod");
     }
 
-    public String getDMSDevUrl(String env) throws IOException, ParseException {
-        getConfigFromJson(env);
+    public String getDMSDevUrl() throws IOException, ParseException {
+        getConfigFromJson();
         return API_DMS_DEV;
     }
 
-    public String getDMSProdUrl(String env) throws IOException, ParseException {
-        getConfigFromJson(env);
+    public String getDMSProdUrl() throws IOException, ParseException {
+        getConfigFromJson();
         return API_DMS_PROD;
     }
 }
