@@ -20,4 +20,5 @@ dependencies {
     testImplementation group: 'io.appium', name: 'java-client', version: '7.5.1'
     testImplementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     testImplementation group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
+    testImplementation group: 'io.qameta.allure', name: 'allure-cucumber6-jvm', version: '2.17.3'
 }
