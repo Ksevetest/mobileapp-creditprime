@@ -14,7 +14,7 @@ public class SignInScreen extends BaseScreen {
     /**
      * Mobile Elements
      */
-    By welcomeMessage = MobileBy.xpath("//*[@content-desc='Salut!']"),
+    By welcomeMessage = MobileBy.xpath("//*[@content-desc='Saluta!']"),
             signInButton = MobileBy.xpath("//*[@content-desc='LOGARE']"),
             termsAndConditions = MobileBy.xpath("//*[@content-desc='Termeni și condiții']"),
             acceptButton = MobileBy.xpath("//*[@content-desc='ACCEPT']"),
