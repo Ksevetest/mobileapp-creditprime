@@ -27,7 +27,7 @@ public class RegressionTestSteps {
     }
 
     @And("inserts {word} valid credentials")
-    public void insertsValidCredentials(String username) throws IOException, ParseException {
+    public void insertsValidCredentials(String username) throws IOException, ParseException, InterruptedException {
         signInScreen.insertCredentials(username);
     }
 
@@ -64,7 +64,7 @@ public class RegressionTestSteps {
     }
 
     @Given("client logs in with {word} credentials")
-    public void clientLogsInWithTESTSVETLANACredentials(String username) throws IOException, ParseException {
+    public void clientLogsInWithTESTSVETLANACredentials(String username) throws IOException, ParseException, InterruptedException {
         signInScreen.verifySignInScreen();
         signInScreen.verifyTermsAndConditions();
         signInScreen.insertCredentials(username);

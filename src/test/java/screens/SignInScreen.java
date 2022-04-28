@@ -40,7 +40,7 @@ public class SignInScreen extends BaseScreen {
         click(acceptButton);
     }
 
-    public void insertCredentials(String username) throws IOException, ParseException {
+    public void insertCredentials(String username) throws IOException, ParseException, InterruptedException {
         click(phoneNumber);
 //        sendKeysAction(testUser.getPhone(username));
         sendKeys(phoneNumberEdit, testUser.getPhone(username));

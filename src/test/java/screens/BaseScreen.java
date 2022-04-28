@@ -44,8 +44,9 @@ public class BaseScreen extends AppFactory {
         action.sendKeys(inputText).perform();
     }
 
-    public void sendKeys(By element, String inputText) {
-       driver.findElement(element).sendKeys(inputText);
+    public void sendKeys(By element, String inputText) throws InterruptedException {
+        Thread.sleep(2000);
+        driver.findElement(element).sendKeys(inputText);
     }
 
     // works faster than loop
