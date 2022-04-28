@@ -3,7 +3,7 @@
 @Android
 Feature: Testing sign in and logout
 
-  @regression @smoke
+  @regression @smoke @signIn
   Scenario: CreditPrime login/logout test
     Given client opens creditPrime mobile application
     When client accepts terms and conditions
@@ -13,7 +13,7 @@ Feature: Testing sign in and logout
     And opens My Profile page
     And logs out from the mobile app
 
-  @regression @smoke
+  @regression @smoke @signIn
   Scenario: client without active loan
     Given client opens creditPrime mobile application
     When client accepts terms and conditions
