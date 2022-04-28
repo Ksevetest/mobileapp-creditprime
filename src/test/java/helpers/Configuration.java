@@ -3,10 +3,10 @@ package helpers;
 public class Configuration {
 
     //testUsers
-    public static final String PREDEFINED_USERS = "/Users/creditline-romania-at/src/test/java/helpers/user/predefinedClients.json";
+    public static final String PREDEFINED_USERS = "src/test/java/helpers/user/predefinedClients.json";
 
     // api urls
-    public static final String EF_SETTINGS = "/Users/creditline-romania-at/src/test/java/helpers/api/ef_settings.json";
+    public static final String EF_SETTINGS = "src/test/java/helpers/api/ef_settings.json";
 
     // api routs
     public static final String PASSWORD_RECOVERY_ROUTE = "/mobile-app/v1/password-recovery/sms/";
