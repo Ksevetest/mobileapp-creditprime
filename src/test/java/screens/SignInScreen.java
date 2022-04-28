@@ -40,12 +40,10 @@ public class SignInScreen extends BaseScreen {
         click(acceptButton);
     }
 
-    public void insertCredentials(String username) throws IOException, ParseException, InterruptedException {
+    public void insertCredentials(String username) throws IOException, ParseException {
         click(phoneNumber);
-//        sendKeysAction(testUser.getPhone(username));
         sendKeys(phoneNumberEdit, testUser.getPhone(username));
         click(passwordField);
-//        sendKeysAction(testUser.getPassword(username));
         sendKeys(passwordFieldEdit, testUser.getPassword(username));
         click(proceedButton);
         waitForInvisibilityOfElement(proceedButton);

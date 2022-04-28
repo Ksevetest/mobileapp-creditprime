@@ -87,7 +87,7 @@ public class PasswordRecoverySteps {
     }
 
     @And("old {word} password is set")
-    public void oldPasswordIsSet(String username) throws IOException, ParseException, InterruptedException {
+    public void oldPasswordIsSet(String username) throws IOException, ParseException {
         myProfileScreen.logoutAfterPasswordChange();
         signInScreen.verifySignInScreen();
         signInScreen.verifyTermsAndConditions();
