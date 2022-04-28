@@ -38,9 +38,14 @@ public class BaseScreen extends AppFactory {
         driver.findElement(element).click();
     }
 
+    // can be useful in some cases
     public void sendKeysAction(String inputText) {
         Actions action = new Actions(driver);
         action.sendKeys(inputText).perform();
+    }
+
+    public void sendKeys(By element, String inputText) {
+       driver.findElement(element).sendKeys(inputText);
     }
 
     // works faster than loop

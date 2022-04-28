@@ -14,12 +14,14 @@ public class SignInScreen extends BaseScreen {
     /**
      * Mobile Elements
      */
-    By welcomeMessage = MobileBy.xpath("//*[@content-desc='Saluta!']"),
+    By welcomeMessage = MobileBy.xpath("//*[@content-desc='Salut!']"),
             signInButton = MobileBy.xpath("//*[@content-desc='LOGARE']"),
             termsAndConditions = MobileBy.xpath("//*[@content-desc='Termeni și condiții']"),
             acceptButton = MobileBy.xpath("//*[@content-desc='ACCEPT']"),
             phoneNumber = MobileBy.xpath("//*[contains(@text,'Număr de telefon')]"),
+            phoneNumberEdit = MobileBy.xpath("//android.widget.EditText[1]"),
             passwordField = MobileBy.xpath("//*[contains(@text,'Parola')]"),
+            passwordFieldEdit = MobileBy.xpath("//android.widget.EditText[2]"),
             confirmPINMessage = MobileBy.xpath("//*[@content-desc='Confirmă codul PIN']"),
             skipButton = MobileBy.xpath("//*[@content-desc='MAI DEPARTE']"),
             insertPINMessage = MobileBy.xpath("//*[@content-desc='Introdu codul PIN']"),
@@ -40,9 +42,11 @@ public class SignInScreen extends BaseScreen {
 
     public void insertCredentials(String username) throws IOException, ParseException {
         click(phoneNumber);
-        sendKeysAction(testUser.getPhone(username));
+//        sendKeysAction(testUser.getPhone(username));
+        sendKeys(phoneNumberEdit, testUser.getPhone(username));
         click(passwordField);
-        sendKeysAction(testUser.getPassword(username));
+//        sendKeysAction(testUser.getPassword(username));
+        sendKeys(passwordFieldEdit, testUser.getPassword(username));
         click(proceedButton);
         waitForInvisibilityOfElement(proceedButton);
     }
